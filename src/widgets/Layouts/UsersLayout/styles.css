@@ -1,0 +1,11 @@
+.users_layout{
+    display: flex;
+}
+
+.users_layout_content{
+    padding: 24px;
+}
+
+.users_layout_body{
+    margin-top: 16px;
+}

@@ -1,0 +1,25 @@
+.table_header {
+    display: grid;
+    grid-template-columns: 32px 548px 240px 548px 240px;
+    align-items: center;
+    background-color: #F4F6F7;
+    border-top: 1px solid #CDD0D2;
+    border-bottom: 1px solid #CDD0D2;
+    height: 50px;
+    width: 1608px;
+}
+
+.table_header > div {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+    padding: 8px;
+}
+
+.checkbox_column > input{
+    margin-left: 8px;
+}
+
+.table_header .checkbox_column {
+    padding: 0;
+}

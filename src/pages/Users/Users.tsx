@@ -1,18 +1,29 @@
-import { FC } from 'react';
-
-import { $api } from 'shared/api/api';
-import { BasicResponse } from 'app/api/entites/BasicResponse';
-import IUser from '../../app/api/entites/User/IUser';
+import { FC, useEffect } from 'react';
+import useUsersStore from './api/store';
+import UsersTable from './components/UsersTable/UsersTable';
+import UsersHeader from './components/UsersHeader/UsersHeader';
+import UsersLayout from '../../widgets/Layouts/UsersLayout/UsersLayout';
+import UsersSidebar from './components/UsersSidebar/UsersSidebar';
 
 interface UsersProps {}
 
 const Users: FC<UsersProps> = (props) => {
-    const {} = props;
+    const { users, loading, error, getUsersAll } = useUsersStore();
 
-    const test = $api.get<BasicResponse<IUser[]>>('/person?active_only=0');
-    test.then((response) => console.log(response.data.result));
+    useEffect(() => {
+        getUsersAll({ active_only: true });
+    }, []);
 
-    return <div></div>;
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+
+    return (
+        <UsersLayout
+            sidebar={<UsersSidebar />}
+            header={<UsersHeader />}
+            body={<UsersTable users={users} />}
+        />
+    );
 };
 
 export default Users;

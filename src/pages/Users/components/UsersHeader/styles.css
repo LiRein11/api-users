@@ -1,0 +1,35 @@
+.users_header{
+    display: flex;
+    justify-content: space-between;
+    height: 47px;
+    width: 1608px;
+    border-bottom: 1px solid #999C9E;
+}
+
+.users_header_left_text{
+    font-size: 24px;
+    line-height: 32px;
+}
+
+.users_header_left_count{
+    color: #999C9E;
+}
+
+.users_header_left{
+    display: flex;
+    height: 48px;
+}
+
+.users_header_left > *:not(:last-child) {
+    margin-right: 8px;
+}
+
+.users_header_right > *:not(:last-child) {
+    margin-right: 8px;
+}
+
+.users_header_right_input{
+    height: 32px;
+    width: 360px;
+    bottom: 2px;
+}

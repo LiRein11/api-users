@@ -3,11 +3,11 @@ import { $api } from './api';
 $api.interceptors.request.use(
     (config) => {
         config.headers.Authorization =
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbmZvIjp7ImV4cG' +
-            'lyZWQiOiIyMDI0LTEwLTAyVDE2OjIwOjI1LjQ0OTM5OTE2NyswNTowMCIsImlkIjoxLCJsb2dpbi' +
-            'I6ImFkbWluIiwicGVyc29uX2ZpbyI6ItCQ0JTQnNCY0J3QmNCh0KLQoNCQ0K' +
-            'LQntCgIiwicGVyc29uX2lkIjoxLCJyb2xlX2lkIjoxMywidHlwZSI6IndlYiJ9LCJzdWIiOiIxIn0.8i84o-C' +
-            'DulOTy2zqZhmxE4VCmZJoFUGl4IfPgn1xKvg';
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ey' +
+            'JpbmZvIjp7ImV4cGlyZWQiOiIyMDI0LTEwLTAzVDEyOjQzOjUzLjQ5MjQ2Njg3Kz' +
+            'A1OjAwIiwiaWQiOjU5NiwibG9naW4iOiJ0ZXN0X2xvZ2luIiwicGVyc29uX2ZpbyI6ItCi0LXR' +
+            'gdGCINCi0LXRgdGC0L7QstC40YciLCJwZXJzb25faWQiOjIzNDgsInJvbGVfaWQiOjEsInR5cGUiOiJ3ZWIifSw' +
+            'ic3ViIjoiNTk2In0.kw0z0VugWFaAxkcgxG-ZJPpLmngGx7aLqBoxk46bcso';
 
         return config;
     },
@@ -21,6 +21,8 @@ $api.interceptors.response.use(
         return response;
     },
     (error) => {
-        return Promise.resolve({ data: { success: false, error: error } });
+        return Promise.resolve({
+            data: { success: false, error: error.message || 'Unknown error' },
+        });
     },
 );
