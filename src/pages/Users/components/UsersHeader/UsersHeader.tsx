@@ -8,18 +8,24 @@ import SearchImg from 'app/assets/icons/Search.png';
 
 import './styles.css';
 import { Input } from 'antd';
+import useUsersStore from '../../api/store';
 
-interface UsersHeaderProps {}
+interface UsersHeaderProps {
+    openModal: () => void;
+}
 
 const UsersHeader: FC<UsersHeaderProps> = (props) => {
-    const {} = props;
+    const { openModal } = props;
+    const { users } = useUsersStore();
 
     return (
         <div className={'users_header'}>
             <div className={'users_header_left'}>
                 <div className={'users_header_left_text'}>Пользователи</div>
-                <div className={'users_header_left_text users_header_left_count'}>(30)</div>
-                <CustomButton imgSrc={PlusImg} />
+                <div className={'users_header_left_text users_header_left_count'}>
+                    ({users.length})
+                </div>
+                <CustomButton imgSrc={PlusImg} onClick={openModal} />
             </div>
             <div className={'users_header_right'}>
                 <Input

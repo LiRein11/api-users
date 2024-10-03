@@ -5,6 +5,17 @@
     border-radius: 6px;
 }
 
+.modal_btn {
+    width: 113px;
+    height: 32px;
+    background-color: #4D4E65;
+    color: #fff;
+    border-radius: 6px;
+    display: flex;
+    margin: auto;
+    margin-top: 30px;
+}
+
 .custom-button:hover,
 .custom-button:focus {
     background-color: #4D4E65 !important;

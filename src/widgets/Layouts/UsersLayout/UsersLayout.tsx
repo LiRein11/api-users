@@ -8,6 +8,16 @@ interface UsersLayoutProps {
     sidebar: ReactNode;
 }
 
+/**
+ * Компонент шаблона для страницы Users
+ *
+ * @component
+ * @param {UsersLayoutProps} props - Свойства компонента.
+ * @param {ReactNode} props.header - Header страницы Users.
+ * @param {ReactNode} props.body - Body страницы Users.
+ * @param {ReactNode} props.sidebar - Sidebar страницы Users.
+ * @returns {FC} - Возвращает компонент странички Users.
+ */
 const UsersLayout: FC<UsersLayoutProps> = (props) => {
     const { header, body, sidebar } = props;
 

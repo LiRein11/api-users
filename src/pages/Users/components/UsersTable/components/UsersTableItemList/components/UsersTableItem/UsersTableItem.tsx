@@ -2,7 +2,7 @@ import { FC } from 'react';
 import AvatarImg from 'app/assets/icons/Avatar.png';
 
 import './styles.css';
-import IUser from '../../../../../../app/api/entites/User/IUser';
+import IUser from '../../../../../../../../app/api/entites/User/IUser';
 
 export type DesignVariant = 1 | 2;
 
@@ -17,7 +17,7 @@ const variantClassMap: Record<number, string> = {
 
 const UsersTableItem: FC<UsersTableItemProps> = (props) => {
     const { user } = props;
-    console.log(user);
+
     const roleClass = variantClassMap[user.job_title.id];
 
     return (

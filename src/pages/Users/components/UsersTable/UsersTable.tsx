@@ -5,16 +5,10 @@ import UsersTableHeader from './components/UsersTableHeader/UsersTableHeader';
 import UsersTableItemList from './components/UsersTableItemList/UsersTableItemList';
 import IUser from '../../../../app/api/entites/User/IUser';
 
-interface UsersTableProps {
-    users: IUser[];
-}
+interface UsersTableProps {}
 
 const UsersTable: FC<UsersTableProps> = (props) => {
-    const { users } = props;
-
-    return (
-        <TableLayout body={<UsersTableItemList users={users} />} header={<UsersTableHeader />} />
-    );
+    return <TableLayout body={<UsersTableItemList />} header={<UsersTableHeader />} />;
 };
 
 export default UsersTable;

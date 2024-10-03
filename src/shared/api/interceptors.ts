@@ -22,7 +22,7 @@ $api.interceptors.response.use(
     },
     (error) => {
         return Promise.resolve({
-            data: { success: false, error: error.message || 'Unknown error' },
+            data: { success: false, error: error.response.data.error || 'Unknown error' },
         });
     },
 );

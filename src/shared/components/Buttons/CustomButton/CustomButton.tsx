@@ -1,22 +1,29 @@
 import { FC } from 'react';
 
 import './styles.css';
-import { Button } from 'antd';
+import { Button, ButtonProps } from 'antd';
 
-interface CustomButtonProps {
-    imgSrc: string;
+interface CustomButtonProps extends ButtonProps {
+    imgSrc?: string;
+    className?: string;
+    text?: string;
 }
 
+/**
+ * Компонент кастомной кнопки
+ *
+ * @component
+ * @param {CustomButtonProps} props - Свойства компонента.
+ * @param {string} props.imgSrc - URL изображения, которое будет отображаться на кнопке.
+ * @return {FC} - Возвращает компонент кнопки с изображением.
+ */
 const CustomButton: FC<CustomButtonProps> = (props) => {
-    const { imgSrc } = props;
+    const { imgSrc, className, text, ...buttonProps } = props;
 
     return (
-        <Button className="custom-button">
-            <img
-                src={imgSrc} // Замените на URL вашего изображения
-                alt="icon"
-                style={{ width: 12, height: 12 }}
-            />
+        <Button className={className ? className : 'custom-button'} {...buttonProps}>
+            {imgSrc && <img src={imgSrc} alt="icon" style={{ width: 12, height: 12 }} />}
+            {text && text}
         </Button>
     );
 };

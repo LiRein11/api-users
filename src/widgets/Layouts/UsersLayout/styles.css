@@ -1,5 +1,8 @@
 .users_layout{
     display: flex;
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
 }
 
 .users_layout_content{
@@ -7,5 +10,6 @@
 }
 
 .users_layout_body{
+
     margin-top: 16px;
 }
