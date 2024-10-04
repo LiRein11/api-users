@@ -3,46 +3,45 @@ import { create } from 'zustand';
 import {
     createPersonApi,
     getPersonApi,
+    updatePersonApi,
 } from '../../../app/api/requests/archive_server.api/dictionaries/person';
 import {
     CreatePersonProps,
     GetPersonProps,
+    UpdatePersonProps,
 } from '../../../app/api/requests/archive_server.api/dictionaries/person/types';
-import { BasicResponse } from '../../../app/api/entites/BasicResponse';
 
 interface UsersState {
     loading?: boolean;
     error?: string | null;
     users: IUser[];
     openAdd: boolean;
-    success: boolean;
-    isAdmin: boolean;
+    editable?: IUser;
 }
 
 interface UsersActions {
     getUsersAll: (props: GetPersonProps) => void;
     createPerson: (props: CreatePersonProps) => void;
-    setOpenAdd: () => void;
-    setSuccess: (success: boolean) => void;
-    setIsAdmin: (isAdmin: boolean) => void;
+    setOpenAdd: (open: boolean) => void;
+    setEditable: (user?: IUser) => void;
+    updatePerson: (props: UpdatePersonProps) => void;
     clearError: () => void;
 }
 
 const initialState: UsersState = {
     loading: false,
     error: undefined,
-    success: false,
     users: [],
     openAdd: false,
-    isAdmin: false,
 };
 
 export const useUsersStore = create<UsersState & UsersActions>((set, getState) => ({
     ...initialState,
-    setOpenAdd: () => set((state) => ({ openAdd: !state.openAdd, error: null, success: false })),
+    setOpenAdd: (open) => {
+        console.log(getState().openAdd);
+        set({ openAdd: open });
+    },
     clearError: () => set({ error: null }),
-    setSuccess: (success) => set({ success }),
-    setIsAdmin: (isAdmin) => set({ isAdmin }),
     getUsersAll: (props) => {
         set({ loading: true, error: null });
         getPersonApi(props)
@@ -59,22 +58,33 @@ export const useUsersStore = create<UsersState & UsersActions>((set, getState) =
         createPersonApi(props)
             .then((response) => {
                 if (!response.error) {
-                    getState().setOpenAdd();
+                    getState().setOpenAdd(false);
                     getState().getUsersAll({ active_only: true });
-                    set({
-                        success: true,
-                    });
                 } else {
                     set({
-                        success: false,
                         error: response.error,
                     });
                 }
-
-                // Вызываем функцию для обновления списка пользователей
             })
-            .catch((error) => set({ error: error.message }))
             .finally(() => set({ loading: false }));
+    },
+    updatePerson: (props) => {
+        set({ loading: true, error: null });
+        updatePersonApi(props)
+            .then((response) => {
+                if (!response.error) {
+                    getState().setEditable(undefined);
+                    getState().getUsersAll({ active_only: true });
+                } else {
+                    set({
+                        error: response.error,
+                    });
+                }
+            })
+            .finally(() => set({ loading: false }));
+    },
+    setEditable: (user) => {
+        set({ editable: user });
     },
 }));
 

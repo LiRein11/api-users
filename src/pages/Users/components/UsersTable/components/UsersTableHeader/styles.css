@@ -1,6 +1,7 @@
 .table_header {
     display: grid;
-    grid-template-columns: 32px 548px 240px 548px 240px;
+    grid-template-columns: 32px 500px 240px 400px 240px 198px;
+
     align-items: center;
     background-color: #F4F6F7;
     border-top: 1px solid #CDD0D2;

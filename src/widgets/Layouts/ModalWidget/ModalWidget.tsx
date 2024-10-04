@@ -1,15 +1,18 @@
 import { FC, ReactNode } from 'react';
 
 import './styles.css';
+import { Modal } from 'antd';
 
 interface ModalWidgetProps {
-    header: string;
     children: ReactNode;
     onClose?: () => void;
+    open: boolean;
+    title?: string;
+    width?: string | number;
 }
 
 /**
- * Компонент
+ * Лайаут модалки
  *
  * @component
  * @param {ModalWidgetProps} props - Свойства компонента.
@@ -17,15 +20,19 @@ interface ModalWidgetProps {
  * @returns {FC} - Возвращает шаблон модалки.
  */
 const ModalWidget: FC<ModalWidgetProps> = (props) => {
-    const { header, children, onClose } = props;
+    const { children, onClose, title, open, width } = props;
 
     return (
-        <div className="modal_overlay" onClick={onClose}>
-            <div className="modal_content" onClick={(e) => e.stopPropagation()}>
-                <div className="modal_header">{header}</div>
-                <div className="modal_body">{children}</div>
-            </div>
-        </div>
+        <Modal
+            onCancel={onClose}
+            title={<div className="modal_header">{title}</div>}
+            key={title}
+            width={width ?? 616}
+            open={open}
+            footer={<div />}
+        >
+            {children}
+        </Modal>
     );
 };
 

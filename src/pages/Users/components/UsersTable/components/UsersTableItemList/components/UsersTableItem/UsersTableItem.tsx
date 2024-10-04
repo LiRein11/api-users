@@ -3,6 +3,8 @@ import AvatarImg from 'app/assets/icons/Avatar.png';
 
 import './styles.css';
 import IUser from '../../../../../../../../app/api/entites/User/IUser';
+import CustomButton from '../../../../../../../../shared/components/Buttons/CustomButton/CustomButton';
+import useUsersStore from '../../../../../../api/store';
 
 export type DesignVariant = 1 | 2;
 
@@ -17,7 +19,7 @@ const variantClassMap: Record<number, string> = {
 
 const UsersTableItem: FC<UsersTableItemProps> = (props) => {
     const { user } = props;
-
+    const { setEditable } = useUsersStore();
     const roleClass = variantClassMap[user.job_title.id];
 
     return (
@@ -32,6 +34,13 @@ const UsersTableItem: FC<UsersTableItemProps> = (props) => {
             <div>{user.fio}</div>
             <div>{user.iin}</div>
             <div className={roleClass ?? 'table_item_role_operator'}>{user.job_title.name_add}</div>
+            <div>
+                <CustomButton
+                    className={'edit_btn'}
+                    text={'Редактировать'}
+                    onClick={() => setEditable(user)}
+                />
+            </div>
         </div>
     );
 };

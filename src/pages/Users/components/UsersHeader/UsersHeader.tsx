@@ -10,13 +10,11 @@ import './styles.css';
 import { Input } from 'antd';
 import useUsersStore from '../../api/store';
 
-interface UsersHeaderProps {
-    openModal: () => void;
-}
+interface UsersHeaderProps {}
 
 const UsersHeader: FC<UsersHeaderProps> = (props) => {
-    const { openModal } = props;
-    const { users } = useUsersStore();
+    const {} = props;
+    const { users, setOpenAdd } = useUsersStore();
 
     return (
         <div className={'users_header'}>
@@ -25,7 +23,7 @@ const UsersHeader: FC<UsersHeaderProps> = (props) => {
                 <div className={'users_header_left_text users_header_left_count'}>
                     ({users.length})
                 </div>
-                <CustomButton imgSrc={PlusImg} onClick={openModal} />
+                <CustomButton imgSrc={PlusImg} onClick={() => setOpenAdd(true)} />
             </div>
             <div className={'users_header_right'}>
                 <Input

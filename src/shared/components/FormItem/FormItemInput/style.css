@@ -1,0 +1,29 @@
+
+.ant-form-item-control-input {
+    /*border: none !important;*/
+
+    /*.ant-input-mask {*/
+    /*    padding: 0 8px;*/
+    /*    font-size: 14px;*/
+    /*    height: 30px;*/
+    /*    width: 100%;*/
+    /*    background-color: transparent;*/
+    /*    border: none;*/
+    /*    border-bottom: 2px solid var(--primary) !important;*/
+    /*    border-radius: 8px 8px 0 0;*/
+    /*    outline: none;*/
+
+    /*    &:focus {*/
+    /*        background-color: var(--button-secondary-hover);*/
+    /*    }*/
+
+    /*    &:disabled {*/
+    /*        color: var(--textSecondary);*/
+    /*        border-bottom-color: var(--divider2) !important;*/
+    /*    }*/
+
+    /*    &::selection {*/
+    /*        border: none !important;*/
+    /*    }*/
+    /*}*/
+}

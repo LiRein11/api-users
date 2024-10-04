@@ -1,6 +1,6 @@
 .table_item {
     display: grid;
-    grid-template-columns: 32px 548px 240px 548px 240px;
+    grid-template-columns: 32px 500px 240px 400px 240px 198px;
     align-items: center;
     border-bottom: 1px solid #CDD0D2;
     height: 50px;

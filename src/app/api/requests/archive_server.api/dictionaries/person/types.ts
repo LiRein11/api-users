@@ -8,3 +8,8 @@ export interface CreatePersonProps {
     job_title_id: number;
     iin: string;
 }
+
+export interface UpdatePersonProps extends CreatePersonProps {
+    id: number;
+    is_fired: boolean;
+}
