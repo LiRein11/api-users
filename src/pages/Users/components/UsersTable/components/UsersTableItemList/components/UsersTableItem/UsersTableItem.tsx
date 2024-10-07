@@ -5,6 +5,8 @@ import './styles.css';
 import IUser from '../../../../../../../../app/api/entites/User/IUser';
 import CustomButton from '../../../../../../../../shared/components/Buttons/CustomButton/CustomButton';
 import useUsersStore from '../../../../../../api/store';
+import PrimaryDelete from '../../../../../../../../shared/components/Buttons/PrimaryDelete/PrimaryDelete';
+import { Col, Divider, Row } from 'antd';
 
 export type DesignVariant = 1 | 2;
 
@@ -34,12 +36,13 @@ const UsersTableItem: FC<UsersTableItemProps> = (props) => {
             <div>{user.fio}</div>
             <div>{user.iin}</div>
             <div className={roleClass ?? 'table_item_role_operator'}>{user.job_title.name_add}</div>
-            <div>
+            <div className={'table_item_box_btns'}>
                 <CustomButton
                     className={'edit_btn'}
                     text={'Редактировать'}
                     onClick={() => setEditable(user)}
                 />
+                <PrimaryDelete onClick={() => {}} optionalTitle={'Удалить'} />
             </div>
         </div>
     );

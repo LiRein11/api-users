@@ -34,7 +34,7 @@ const Users: FC<UsersProps> = (props) => {
     };
 
     useEffect(() => {
-        getUsersAll({ active_only: true });
+        getUsersAll({ active_only: false });
     }, []);
 
     return (

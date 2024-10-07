@@ -7,6 +7,8 @@ interface CustomButtonProps extends ButtonProps {
     imgSrc?: string;
     className?: string;
     text?: string;
+    width?: number;
+    height?: number;
 }
 
 /**
@@ -18,10 +20,14 @@ interface CustomButtonProps extends ButtonProps {
  * @return {FC} - Возвращает компонент кнопки с изображением.
  */
 const CustomButton: FC<CustomButtonProps> = (props) => {
-    const { imgSrc, className, text, ...buttonProps } = props;
+    const { imgSrc, className, text, width, height, ...buttonProps } = props;
 
     return (
-        <Button className={className ? className : 'custom-button'} {...buttonProps}>
+        <Button
+            className={className ? className : 'custom-button'}
+            {...buttonProps}
+            style={{ width: width, height: height }}
+        >
             {imgSrc && <img src={imgSrc} alt="icon" style={{ width: 12, height: 12 }} />}
             {text && text}
         </Button>

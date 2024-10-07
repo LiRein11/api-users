@@ -5,6 +5,11 @@
     border-radius: 6px;
 }
 
+.modal_btn_cancel{
+    width: 32px;
+    height: 32px;
+}
+
 .modal_btn {
     width: 113px;
     height: 32px;
@@ -12,6 +17,16 @@
     color: #fff;
     border-radius: 6px;
     display: flex;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.modal_btn_fired_yes{
+    margin: auto;
+    margin-top: 30px;
+}
+
+.modal_btn_fired_no{
     margin: auto;
     margin-top: 30px;
 }

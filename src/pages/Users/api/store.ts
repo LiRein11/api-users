@@ -4,9 +4,11 @@ import {
     createPersonApi,
     getPersonApi,
     updatePersonApi,
+    updatePersonFiredApi,
 } from '../../../app/api/requests/archive_server.api/dictionaries/person';
 import {
     CreatePersonProps,
+    FiredPersonProps,
     GetPersonProps,
     UpdatePersonProps,
 } from '../../../app/api/requests/archive_server.api/dictionaries/person/types';
@@ -25,6 +27,7 @@ interface UsersActions {
     setOpenAdd: (open: boolean) => void;
     setEditable: (user?: IUser) => void;
     updatePerson: (props: UpdatePersonProps) => void;
+    updatePersonFired: (props: FiredPersonProps) => void;
     clearError: () => void;
 }
 
@@ -38,7 +41,6 @@ const initialState: UsersState = {
 export const useUsersStore = create<UsersState & UsersActions>((set, getState) => ({
     ...initialState,
     setOpenAdd: (open) => {
-        console.log(getState().openAdd);
         set({ openAdd: open });
     },
     clearError: () => set({ error: null }),
@@ -73,7 +75,21 @@ export const useUsersStore = create<UsersState & UsersActions>((set, getState) =
         updatePersonApi(props)
             .then((response) => {
                 if (!response.error) {
-                    getState().setEditable(undefined);
+                    // getState().setEditable(undefined);
+                    getState().getUsersAll({ active_only: true });
+                } else {
+                    set({
+                        error: response.error,
+                    });
+                }
+            })
+            .finally(() => set({ loading: false }));
+    },
+    updatePersonFired: (props) => {
+        set({ loading: true, error: null });
+        updatePersonFiredApi(props)
+            .then((response) => {
+                if (!response.error) {
                     getState().getUsersAll({ active_only: true });
                 } else {
                     set({

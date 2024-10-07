@@ -1,3 +1,5 @@
+import IUser from '../../../../entites/User/IUser';
+
 export interface GetPersonProps {
     active_only: boolean;
 }
@@ -13,3 +15,5 @@ export interface UpdatePersonProps extends CreatePersonProps {
     id: number;
     is_fired: boolean;
 }
+
+export interface FiredPersonProps extends IUser {}

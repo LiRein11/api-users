@@ -1,7 +1,7 @@
 import { $api } from '../../../../../../shared/api/api';
 import { BasicResponse } from '../../../../entites/BasicResponse';
 import IUser from '../../../../entites/User/IUser';
-import { CreatePersonProps, GetPersonProps, UpdatePersonProps } from './types';
+import { CreatePersonProps, FiredPersonProps, GetPersonProps, UpdatePersonProps } from './types';
 import { Simulate } from 'react-dom/test-utils';
 
 export const getPersonApi = (props: GetPersonProps) => {
@@ -15,5 +15,9 @@ export const createPersonApi = (props: CreatePersonProps) => {
 };
 
 export const updatePersonApi = (props: UpdatePersonProps) => {
+    return $api.put(`/person`, props).then((response) => response.data);
+};
+
+export const updatePersonFiredApi = (props: FiredPersonProps) => {
     return $api.put(`/person`, props).then((response) => response.data);
 };

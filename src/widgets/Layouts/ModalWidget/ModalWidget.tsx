@@ -9,6 +9,8 @@ interface ModalWidgetProps {
     open: boolean;
     title?: string;
     width?: string | number;
+    centered?: boolean;
+    closable?: boolean;
 }
 
 /**
@@ -16,16 +18,19 @@ interface ModalWidgetProps {
  *
  * @component
  * @param {ModalWidgetProps} props - Свойства компонента.
- * @param {string} props.imgSrc - .
+ * @param {string} props.imgSrc - Путь к картинке.
  * @returns {FC} - Возвращает шаблон модалки.
  */
 const ModalWidget: FC<ModalWidgetProps> = (props) => {
-    const { children, onClose, title, open, width } = props;
+    const { children, onClose, title, open, width, centered = false, closable = true } = props;
 
     return (
         <Modal
             onCancel={onClose}
             title={<div className="modal_header">{title}</div>}
+            centered={centered}
+            closable // todo
+            destroyOnClose
             key={title}
             width={width ?? 616}
             open={open}

@@ -2,9 +2,12 @@ import React, { FC } from 'react';
 import { Col, Form, Row, Switch } from 'antd';
 import { FormItemProps } from 'shared/model/types/FormItemProps';
 
-interface FormItemSwitchProps extends FormItemProps {}
+interface FormItemSwitchProps extends FormItemProps {
+    disable?: boolean;
+}
 
 const FormItemSwitch: FC<FormItemSwitchProps> = (props) => {
+    const { disable = false } = props;
     return (
         <Row wrap={false}>
             {/*{props.label ? (*/}
@@ -28,7 +31,7 @@ const FormItemSwitch: FC<FormItemSwitchProps> = (props) => {
                     required={false}
                     valuePropName="checked"
                 >
-                    <Switch />
+                    <Switch disabled={disable} />
                 </Form.Item>
             </Col>
         </Row>

@@ -1,0 +1,5 @@
+.modal_container_btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

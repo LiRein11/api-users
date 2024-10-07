@@ -1,6 +1,6 @@
 .table_item {
     display: grid;
-    grid-template-columns: 32px 500px 240px 400px 240px 198px;
+    grid-template-columns: 32px 400px 240px 400px 240px 198px;
     align-items: center;
     border-bottom: 1px solid #CDD0D2;
     height: 50px;
@@ -28,6 +28,10 @@
 
 .table_item_user_avatar{
     margin-right: 8px;
+}
+
+.table_item_box_btns{
+    display: flex;
 }
 
 .table_item_role_operator{
