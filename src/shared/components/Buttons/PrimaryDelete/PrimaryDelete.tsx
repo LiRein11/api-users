@@ -7,6 +7,15 @@ interface PrimaryDeleteProps {
     onClick: () => void;
 }
 
+/**
+ * Компонент для удаления с подтверждением в виде модального окна.
+ *
+ * @component
+ * @param {PrimaryDeleteProps} props - Свойства компонента.
+ * @param {string} [props.optionalTitle] - Необязательный заголовок для модального окна и кнопки.
+ * @param {() => void} props.onClick - Функция, вызываемая при подтверждении удаления.
+ * @returns {FC} - Возвращает компонент кнопки, которая открывает модальное окно с подтверждением удаления.
+ */
 const PrimaryDelete: FC<PrimaryDeleteProps> = ({ optionalTitle, onClick }) => {
     // const {language} = useLanguageStore()
     const [open, setOpen] = React.useState(false);

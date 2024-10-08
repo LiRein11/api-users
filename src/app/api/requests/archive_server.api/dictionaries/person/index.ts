@@ -7,7 +7,10 @@ import { Simulate } from 'react-dom/test-utils';
 export const getPersonApi = (props: GetPersonProps) => {
     return $api
         .get<BasicResponse<IUser[]>>(`/person?active_only=${props.active_only ? 1 : 0}`)
-        .then((response) => response.data);
+        .then((response) => ({
+            ...response.data,
+            result: response.data.result?.reverse().slice(0, 20) ?? [],
+        }));
 };
 
 export const createPersonApi = (props: CreatePersonProps) => {

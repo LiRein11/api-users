@@ -12,12 +12,16 @@ interface CustomButtonProps extends ButtonProps {
 }
 
 /**
- * Компонент кастомной кнопки
+ * Компонент кастомной кнопки, который расширяет стандартную кнопку Ant Design.
  *
  * @component
  * @param {CustomButtonProps} props - Свойства компонента.
- * @param {string} props.imgSrc - URL изображения, которое будет отображаться на кнопке.
- * @return {FC} - Возвращает компонент кнопки с изображением.
+ * @param {string} [props.imgSrc] - URL изображения, которое будет отображаться на кнопке.
+ * @param {string} [props.className] - Класс для стилизации кнопки.
+ * @param {string} [props.text] - Текст, который будет отображаться на кнопке.
+ * @param {number} [props.width] - Ширина кнопки.
+ * @param {number} [props.height] - Высота кнопки.
+ * @returns {FC} - Возвращает компонент кнопки с изображением и текстом.
  */
 const CustomButton: FC<CustomButtonProps> = (props) => {
     const { imgSrc, className, text, width, height, ...buttonProps } = props;

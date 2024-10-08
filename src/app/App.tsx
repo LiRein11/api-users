@@ -1,6 +1,6 @@
 import React from 'react';
 import 'shared/api/interceptors';
-import Users from './pages/Users/Users';
+import Users from '../pages/Users/Users';
 import 'app/styles/ant.css';
 import { ConfigProvider } from 'antd';
 

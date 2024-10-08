@@ -8,13 +8,13 @@ interface TableLayoutProps {
 }
 
 /**
- * Компонент шаблона для компонента UsersTable
+ * Компонент шаблона для компонента таблицы.
  *
  * @component
- * @param {UsersLayoutProps} props - Свойства компонента.
- * @param {ReactNode} props.header - Header страницы UsersTable.
- * @param {ReactNode} props.body - Body компонента UsersTable.
- * @returns {FC} - Возвращает компонент компонента UsersTable.
+ * @param {TableLayoutProps} props - Свойства компонента.
+ * @param {ReactNode} props.header - Header компонента таблицы.
+ * @param {ReactNode} props.body - Body компонента таблицы.
+ * @returns {FC} - Возвращает компонент шаблона таблицы.
  */
 const TableLayout: FC<TableLayoutProps> = (props) => {
     const { header, body } = props;

@@ -20,6 +20,7 @@ $api.interceptors.response.use(
     (response) => {
         return response;
     },
+
     (error) => {
         return Promise.resolve({
             data: { success: false, error: error.response.data.error || 'Unknown error' },

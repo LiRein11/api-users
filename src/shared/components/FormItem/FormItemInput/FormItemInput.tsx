@@ -4,15 +4,38 @@ import isNumeric from 'antd/es/_util/isNumeric';
 import './style.css';
 import { FormItemProps } from '../../../model/types/FormItemProps';
 
+/**
+ * Перечисление типов ввода.
+ *
+ * @enum {number}
+ */
 export enum InputTypeEnum {
     textArea,
     password,
 }
 
+/**
+ * Перечисление форматов ввода.
+ *
+ * @enum {number}
+ */
 export enum InputFormatEnum {
     number,
 }
 
+/**
+ * Интерфейс свойств компонента FormItemInput.
+ *
+ * @interface FormItemInputProps
+ * @extends {FormItemProps}
+ * @property {string} [placeHolder] - Плейсхолдер для поля ввода.
+ * @property {InputTypeEnum} [type] - Тип поля ввода.
+ * @property {number} [rows] - Количество строк для многострочного поля ввода.
+ * @property {number} [maxLength] - Максимальная длина вводимого текста.
+ * @property {number} [minLength] - Минимальная длина вводимого текста.
+ * @property {InputFormatEnum} [format] - Формат вводимого текста.
+ * @property {boolean} [disable] - Флаг, указывающий, отключено ли поле ввода.
+ */
 export interface FormItemInputProps extends FormItemProps {
     placeHolder?: string;
     type?: InputTypeEnum;
@@ -23,6 +46,25 @@ export interface FormItemInputProps extends FormItemProps {
     disable?: boolean;
 }
 
+/**
+ * Компонент формы Input, который представляет собой элемент формы с полем ввода.
+ *
+ * @component
+ * @param {FormItemInputProps} props - Свойства компонента.
+ * @param {string} props.formName - Имя формы, к которой принадлежит элемент.
+ * @param {string} props.name - Имя элемента формы.
+ * @param {string} [props.label] - Метка элемента формы.
+ * @param {boolean} [props.required] - Флаг, указывающий, является ли элемент обязательным.
+ * @param {number} [props.marginBottom] - Нижний отступ элемента формы.
+ * @param {string} [props.placeHolder] - Плейсхолдер для поля ввода.
+ * @param {InputTypeEnum} [props.type] - Тип поля ввода.
+ * @param {number} [props.rows] - Количество строк для многострочного поля ввода.
+ * @param {number} [props.maxLength] - Максимальная длина вводимого текста.
+ * @param {number} [props.minLength] - Минимальная длина вводимого текста.
+ * @param {InputFormatEnum} [props.format] - Формат вводимого текста.
+ * @param {boolean} [props.disable] - Флаг, указывающий, отключено ли поле ввода.
+ * @returns {FC} - Возвращает компонент формы Input.
+ */
 const FormItemInput: FC<FormItemInputProps> = (props) => {
     const getInputType = () => {
         switch (props.type) {

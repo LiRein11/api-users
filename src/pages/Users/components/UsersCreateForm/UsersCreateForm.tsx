@@ -9,9 +9,10 @@ import FormItemInput, {
 import FormItemSwitch from '../../../../shared/components/FormItem/FormItemSwitch/FormItemSwitch';
 import CustomButton from '../../../../shared/components/Buttons/CustomButton/CustomButton';
 import useUsersStore from '../../api/store';
+import IUser from '../../../../app/api/entites/User/IUser';
 
 interface UsersCreateFormProps {
-    onSave?: (values: any) => void; // Добавляем функцию для передачи данных обратно
+    onSave?: (user: IUser) => void;
 }
 
 const UsersCreateForm: FC<UsersCreateFormProps> = (props) => {
@@ -24,7 +25,8 @@ const UsersCreateForm: FC<UsersCreateFormProps> = (props) => {
         form.validateFields()
             .then((values) => {
                 console.log(values);
-                onSave!({ ...values, job_title_id: values.job_title_id ? 1 : 2 });
+                createPerson({ ...values, job_title_id: values.job_title_id ? 1 : 2 });
+                onSave?.({ ...values, job_title_id: values.job_title_id ? 1 : 2 });
             })
             .catch(() => {});
     };

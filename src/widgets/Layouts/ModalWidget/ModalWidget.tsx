@@ -14,12 +14,18 @@ interface ModalWidgetProps {
 }
 
 /**
- * Лайаут модалки
+ * Компонент модального окна, который представляет собой шаблон для модальных окон.
  *
  * @component
  * @param {ModalWidgetProps} props - Свойства компонента.
- * @param {string} props.imgSrc - Путь к картинке.
- * @returns {FC} - Возвращает шаблон модалки.
+ * @param {ReactNode} props.children - Дочерние элементы, которые будут отображаться внутри модального окна.
+ * @param {() => void} [props.onClose] - Функция, вызываемая при закрытии модального окна.
+ * @param {boolean} props.open - Флаг, указывающий, открыто ли модальное окно.
+ * @param {string} [props.title] - Заголовок модального окна.
+ * @param {string | number} [props.width] - Ширина модального окна.
+ * @param {boolean} [props.centered] - Флаг, указывающий, должно ли модальное окно быть центрировано.
+ * @param {boolean} [props.closable] - Флаг, указывающий, должна ли быть кнопка закрытия модального окна.
+ * @returns {FC} - Возвращает компонент модального окна.
  */
 const ModalWidget: FC<ModalWidgetProps> = (props) => {
     const { children, onClose, title, open, width, centered = false, closable = true } = props;
@@ -29,7 +35,7 @@ const ModalWidget: FC<ModalWidgetProps> = (props) => {
             onCancel={onClose}
             title={<div className="modal_header">{title}</div>}
             centered={centered}
-            closable // todo
+            closable
             destroyOnClose
             key={title}
             width={width ?? 616}

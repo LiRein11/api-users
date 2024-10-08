@@ -1,15 +1,31 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { Col, Form, Row, Select, Space } from 'antd';
 import { FormItemProps } from '../../../model/types/FormItemProps';
-import CustomButton from '../../Buttons/CustomButton/CustomButton';
-import OkayImg from 'app/assets/icons/Okay.png';
-import CloseImg from 'app/assets/icons/Close.png';
 
+/**
+ * Интерфейс для описания опций выпадающего списка.
+ *
+ * @interface ISelectOption
+ * @property {any} value - Значение опции.
+ * @property {ReactNode} label - Метка опции.
+ */
 export interface ISelectOption {
     value: any;
     label: ReactNode;
 }
 
+/**
+ * Интерфейс свойств компонента FormItemSelect.
+ *
+ * @interface FormItemSelectProps
+ * @extends {FormItemProps}
+ * @property {function} [callBack] - Функция обратного вызова при изменении значения.
+ * @property {string} [placeholder] - Плейсхолдер для выпадающего списка.
+ * @property {ISelectOption[]} items - Массив опций выпадающего списка.
+ * @property {boolean} [multiply] - Флаг, указывающий, можно ли выбирать несколько опций.
+ * @property {boolean} [allowClear] - Флаг, указывающий, можно ли очистить выбранное значение.
+ * @property {boolean} [oneLine] - Флаг, указывающий, должны ли опции отображаться в одну строку.
+ */
 export interface FormItemSelectProps extends FormItemProps {
     callBack?: (value: any) => void;
     placeholder?: string;
@@ -18,46 +34,33 @@ export interface FormItemSelectProps extends FormItemProps {
     showCode?: boolean;
     allowClear?: boolean;
     oneLine?: boolean;
-    showButtonsAndDescription?: boolean;
-    onAdd?: () => void;
-    onCancel?: () => void;
 }
 
+/**
+ * Компонент формы Select, который представляет собой элемент формы с выпадающим списком.
+ *
+ * @component
+ * @param {FormItemSelectProps} props - Свойства компонента.
+ * @param {string} props.formName - Имя формы, к которой принадлежит элемент.
+ * @param {string} props.name - Имя элемента формы.
+ * @param {string} [props.label] - Метка элемента формы.
+ * @param {boolean} [props.required] - Флаг, указывающий, является ли элемент обязательным.
+ * @param {number} [props.marginBottom] - Нижний отступ элемента формы.
+ * @param {function} [props.callBack] - Функция обратного вызова при изменении значения.
+ * @param {string} [props.placeholder] - Плейсхолдер для выпадающего списка.
+ * @param {ISelectOption[]} props.items - Массив опций выпадающего списка.
+ * @param {boolean} [props.multiply] - Флаг, указывающий, можно ли выбирать несколько опций.
+ * @param {boolean} [props.allowClear] - Флаг, указывающий, можно ли очистить выбранное значение.
+ * @param {boolean} [props.oneLine] - Флаг, указывающий, должны ли опции отображаться в одну строку.
+ * @returns {FC} - Возвращает компонент формы Select.
+ */
 const FormItemSelect: FC<FormItemSelectProps> = (props) => {
-    const [selectedItem, setSelectedItem] = useState<ISelectOption | null>(null);
-    const [showButtons, setShowButtons] = useState(false);
-
-    useEffect(() => {
-        if (selectedItem) {
-            setShowButtons(true);
-        } else {
-            setShowButtons(false);
-        }
-    }, [selectedItem]);
-
-    const handleItemSelect = (value: any) => {
-        // const item = props.items.find((item) => item.value === value);
-        setSelectedItem(value || null);
-        props.callBack?.(value);
-    };
-
-    const handleAddItem = () => {
-        if (selectedItem) {
-            props.onAdd?.();
-            setSelectedItem(null);
-        }
-    };
-
-    const handleCancel = () => {
-        setSelectedItem(null);
-        props.onCancel?.();
-        props.form?.setFieldsValue({ [props.name]: undefined });
-    };
     return (
         <div style={{ width: '100%' }}>
             <Row gutter={[16, 0]} wrap={false}>
                 <Col flex={'auto'}>
                     <Form.Item
+                        shouldUpdate
                         id={props.formName}
                         name={props.name}
                         rules={props.required ? [{ required: true }] : []}
@@ -99,35 +102,38 @@ const FormItemSelect: FC<FormItemSelectProps> = (props) => {
                             }}
                             options={props.items.sort((a, b) => a.value - b.value)}
                             optionRender={(option) => <Space>{option.label}</Space>}
-                            onChange={(value) => handleItemSelect(value)}
+                            onChange={(value) =>
+                                props.callBack?.(props.items.find((item) => item.value === value))
+                            }
+                            // value={}
                         />
                     </Form.Item>
                 </Col>
                 {props.extra ? <Col>{props.extra}</Col> : null}
-                {props.showButtonsAndDescription && showButtons && (
-                    <Row gutter={[2, 0]} wrap={false}>
-                        <Col>
-                            <CustomButton
-                                imgSrc={OkayImg}
-                                width={38}
-                                height={38}
-                                onClick={handleAddItem}
-                            />
-                        </Col>
-                        <Col>
-                            <CustomButton
-                                imgSrc={CloseImg}
-                                danger
-                                variant="solid"
-                                width={38}
-                                height={38}
-                                color="danger"
-                                className={'modal_btn_cancel'}
-                                onClick={handleCancel}
-                            />
-                        </Col>
-                    </Row>
-                )}
+                {/*{props.showButtonsAndDescription && showButtons && (*/}
+                {/*    <Row gutter={[2, 0]} wrap={false}>*/}
+                {/*        <Col>*/}
+                {/*            <CustomButton*/}
+                {/*                imgSrc={OkayImg}*/}
+                {/*                width={38}*/}
+                {/*                height={38}*/}
+                {/*                onClick={() => setOpenAdd(true)}*/}
+                {/*            />*/}
+                {/*        </Col>*/}
+                {/*        <Col>*/}
+                {/*            <CustomButton*/}
+                {/*                imgSrc={CloseImg}*/}
+                {/*                danger*/}
+                {/*                variant="solid"*/}
+                {/*                width={38}*/}
+                {/*                height={38}*/}
+                {/*                color="danger"*/}
+                {/*                className={'modal_btn_cancel'}*/}
+                {/*                onClick={handleCancel}*/}
+                {/*            />*/}
+                {/*        </Col>*/}
+                {/*    </Row>*/}
+                {/*)}*/}
             </Row>
         </div>
     );

@@ -6,6 +6,16 @@ interface FormItemSwitchProps extends FormItemProps {
     disable?: boolean;
 }
 
+/**
+ * Компонент формы Switch, который представляет собой элемент формы с переключателем (Switch).
+ *
+ * @component
+ * @param {FormItemSwitchProps} props - Свойства компонента.
+ * @param {string} props.formName - Имя формы, к которой принадлежит элемент.
+ * @param {string} props.name - Имя элемента формы.
+ * @param {boolean} props.disable - Свойство для отключения компонента.
+ * @returns {FC} - Возвращает компонент.
+ */
 const FormItemSwitch: FC<FormItemSwitchProps> = (props) => {
     const { disable = false } = props;
     return (
