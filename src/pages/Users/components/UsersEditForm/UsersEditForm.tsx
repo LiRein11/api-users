@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 
 import './styles.css';
 import { Col, Form, Row } from 'antd';
@@ -12,8 +12,6 @@ import FormItemInput, {
     InputTypeEnum,
 } from '../../../../shared/components/FormItem/FormItemInput/FormItemInput';
 
-import PlusImg from '../../../../app/assets/icons/Plus.png';
-import FormItemSelect from '../../../../shared/components/FormItem/FormItemSelect/FormItemSelect';
 import UsersSelector from '../UsersSelector/UsersSelector';
 
 interface UsersEditFormProps {
@@ -24,10 +22,7 @@ const UsersEditForm: FC<UsersEditFormProps> = (props) => {
     const { initState } = props;
     const [form] = Form.useForm();
     const formName = 'users-edit-form';
-    const { updatePerson, loading, updatePersonFired, editable, users, openAdd, setOpenAdd } =
-        useUsersStore();
-
-    const [newUser, setNewUser] = useState<IUser | undefined>(undefined);
+    const { updatePerson, loading, updatePersonFired, editable, users } = useUsersStore();
 
     const onSave = () => {
         form.validateFields()
@@ -40,7 +35,6 @@ const UsersEditForm: FC<UsersEditFormProps> = (props) => {
             })
             .catch(() => {});
     };
-    console.log(initState);
 
     const onSaveFired = (fire: boolean) => {
         form.validateFields()
@@ -59,29 +53,8 @@ const UsersEditForm: FC<UsersEditFormProps> = (props) => {
             .catch(() => {});
     };
 
-    const userOptions = users.map((user) => ({
-        value: user.id,
-        label: user.fio,
-    }));
-
-    useEffect(() => {
-        if (newUser) {
-            const selectedUser = users.find((user) => user.iin === newUser.iin);
-            if (selectedUser) {
-                form.setFieldsValue({
-                    users: selectedUser.id,
-                });
-            }
-        }
-    }, [users]);
-
     return (
         <>
-            <UsersSelector
-                open={openAdd}
-                onClose={() => setOpenAdd(false)}
-                onSave={(user) => setNewUser(user)}
-            />
             <Form
                 id={formName}
                 form={form}
@@ -139,38 +112,7 @@ const UsersEditForm: FC<UsersEditFormProps> = (props) => {
                     name="is_fired"
                     label="Уволен"
                 />
-                <Row wrap={false}>
-                    <FormItemSelect
-                        items={userOptions}
-                        name="users"
-                        form={form}
-                        formName={formName}
-                        // callBack={onSelectUser}
-                        // shouldUpdate
-                    />
-
-                    <CustomButton
-                        imgSrc={PlusImg}
-                        width={38}
-                        height={38}
-                        onClick={() => setOpenAdd(true)}
-                    />
-                </Row>
-                {/*{selectedUser && (*/}
-                {/*    <Row gutter={[8, 0]} wrap={false} justify={'center'}>*/}
-                {/*        <Col>*/}
-                {/*            <div>*/}
-                {/*                <h3>Описание пользователя:</h3>*/}
-                {/*                <p>ID: {selectedUser.id}</p>*/}
-                {/*                <p>FIO: {selectedUser.fio}</p>*/}
-                {/*                <p>Code: {selectedUser.code}</p>*/}
-                {/*                <p>Is Fired: {selectedUser.is_fired ? 'Yes' : 'No'}</p>*/}
-                {/*                <p>IIN: {selectedUser.iin}</p>*/}
-                {/*                <p>Job Title: {selectedUser.job_title.name}</p>*/}
-                {/*            </div>*/}
-                {/*        </Col>*/}
-                {/*    </Row>*/}
-                {/*)}*/}
+                <UsersSelector formName={formName} form={form} name="users" multiply />
 
                 <Row gutter={[8, 0]} wrap={false} justify={'center'}>
                     <Col>

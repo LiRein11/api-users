@@ -16,25 +16,14 @@ import UsersEditForm from './components/UsersEditForm/UsersEditForm';
 interface UsersProps {}
 
 const Users: FC<UsersProps> = (props) => {
-    const [form] = Form.useForm();
-    const {
-        createPerson,
-        setOpenAdd,
-        openAdd,
-        error,
-        getUsersAll,
-        clearError,
-        editable,
-        updatePerson,
-        setEditable,
-    } = useUsersStore();
+    const { setOpenAdd, openAdd, getUsersAll, clearError, editable, setEditable } = useUsersStore();
 
     const handleRetry = () => {
         clearError();
     };
 
     useEffect(() => {
-        getUsersAll({ active_only: false });
+        getUsersAll({ active_only: false }, true);
     }, []);
 
     return (

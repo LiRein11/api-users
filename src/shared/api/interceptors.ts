@@ -1,4 +1,5 @@
 import { $api } from './api';
+import { LocalNotification } from '../../modules/notifications/notifications';
 
 $api.interceptors.request.use(
     (config) => {
@@ -22,6 +23,11 @@ $api.interceptors.response.use(
     },
 
     (error) => {
+        console.log(error);
+        LocalNotification.error({
+            title: 'Ошибка',
+            description: error?.response?.data?.error ?? 'ERROR',
+        });
         return Promise.resolve({
             data: { success: false, error: error.response.data.error || 'Unknown error' },
         });
